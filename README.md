@@ -4,7 +4,7 @@ The code in this repository is based of the
 [How to Code a VSCode Extension](https://www.youtube.com/watch?v=a5DX5pQ9p5M)
 video.
 
-# Setup
+## Setup
 
 ```bash
 npm install -g yo generator-code
@@ -18,3 +18,15 @@ yo code # select typescript and npm
 - in the new launched window use SHIFT-CNTL-P run `Hello World`
 - in new launched window run S-C-P `Developer: Reload Window` to see latest code
   change or use the Ctrl-R shortcut
+
+## Postgres DB Setup
+
+Details taken form [here](https://hub.docker.com/_/postgres).
+
+```bash
+docker stack deploy -c stack.yml postgres
+```
+
+## History
+
+- Initially vstodo-ext was create with `yo code` as vstodo.
