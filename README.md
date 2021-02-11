@@ -27,6 +27,8 @@ Details taken form [here](https://hub.docker.com/_/postgres).
 docker stack deploy -c stack.yml postgres
 ```
 
+- Use the gui to create the `vstodo` database.
+
 ## History
 
 - Initially vstodo-ext was create with `yo code` as vstodo.
