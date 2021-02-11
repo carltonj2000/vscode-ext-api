@@ -1,0 +1,110 @@
+{
+  "name": "vstodo",
+  "displayName": "VSTodo",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:vstodo-sidebar",
+    "onCommand:vstodo.addTodo",
+    "onCommand:vstodo.askQuestion",
+    "onCommand:vstodo.helloWorld",
+    "onCommand:vstodo.refreshWebview",
+    "onCommand:vstodo.refreshSidebar"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vstodo-sidebar-view",
+          "title": "VSTodo",
+          "icon": "media/checklist.svg"
+        }
+      ]
+    },
+    "views": {
+      "vstodo-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "vstodo-sidebar",
+          "name": "VSTodo",
+          "icon": "media/checklist.svg",
+          "contextualTitle": "VSTodo"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vstodo.refreshSidebar",
+        "category": "VSTodo",
+        "title": "Refresh Sidebar"
+      },
+      {
+        "command": "vstodo.refreshWebview",
+        "category": "VSTodo",
+        "title": "Refresh Webview"
+      },
+      {
+        "command": "vstodo.helloWorld",
+        "category": "VSTodo",
+        "title": "Hello World"
+      },
+      {
+        "command": "vstodo.askQuestion",
+        "category": "VSTodo",
+        "title": "Ask Question"
+      },
+      {
+        "command": "vstodo.addTodo",
+        "category": "VSTodo",
+        "title": "Add Todo From Selection"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile:old": "webpack",
+    "watch:old": "webpack --watch",
+    "watch": "concurrently \"rollup -c -w\" \"webpack --watch --config ./webpack.config.js\"",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.1.1",
+    "@rollup/plugin-typescript": "^8.1.1",
+    "@tsconfig/svelte": "^1.0.10",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.53.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "rollup": "^2.38.5",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^3.32.2",
+    "svelte-check": "^1.1.33",
+    "svelte-preprocess": "^4.6.6",
+    "ts-loader": "^8.0.14",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0",
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.4.0"
+  }
+}
