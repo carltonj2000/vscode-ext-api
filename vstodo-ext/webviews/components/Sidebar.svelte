@@ -10,22 +10,24 @@
   let accessToken = "";
 
   onMount(async () => {
-    window.addEventListener("message", (event) => {
+    window.addEventListener("message", async (event) => {
       const message = event.data;
       switch (message.type) {
         case "new-todo":
           todos = [...todos, { text: message.value, completed: false }];
           break;
+        case "token":
+          accessToken = message.value;
+          const resp = await fetch(`${apiBaseUri}/me`, {
+            headers: { authorization: `Bearer ${accessToken}` },
+          });
+          const data = await resp.json();
+          user = data.user;
+          loading = false;
+          break;
       }
     });
-    console.log("fetching ...");
-    const resp = await fetch(`${apiBaseUri}/me`, {
-      headers: { authorization: `Bearer ${accessToken}` },
-    });
-    const data = await resp.json();
-    console.log("fetch finished.");
-    user = data.user;
-    loading = false;
+    tsvscode.postMessage({ type: "get-token", value: undefined });
   });
 </script>
 

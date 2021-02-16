@@ -5,5 +5,4 @@ declare global {
     postMessage: ({ type: string, value: any }) => void;
   };
   const apiBaseUri: string;
-  const accessToken: string;
 }
