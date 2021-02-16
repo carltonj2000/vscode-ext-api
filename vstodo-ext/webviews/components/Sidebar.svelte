@@ -5,8 +5,11 @@
 
   let todos: Array<{ text: string; completed: boolean }> = [];
   let text = "";
+  let loading = true;
+  let user: { name: string; id: number } | null = null;
+  let accessToken = "";
 
-  onMount(() => {
+  onMount(async () => {
     window.addEventListener("message", (event) => {
       const message = event.data;
       switch (message.type) {
@@ -15,10 +18,25 @@
           break;
       }
     });
+    console.log("fetching ...");
+    const resp = await fetch(`${apiBaseUri}/me`, {
+      headers: { authorization: `Bearer ${accessToken}` },
+    });
+    const data = await resp.json();
+    console.log("fetch finished.");
+    user = data.user;
+    loading = false;
   });
 </script>
 
 <div>
+  {#if loading}
+    <div>loading ...</div>
+  {:else if user}
+    <pre>{JSON.stringify(user, null, 2)}</pre>
+  {:else}
+    <div>No user is logged in.</div>
+  {/if}
   <button
     on:click={() => {
       tsvscode.postMessage({ type: "onInfo", value: "info message" });
